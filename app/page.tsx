@@ -1,7 +1,6 @@
-import Listings from './listings';
-import { Listing } from './types';
 
-
+import Listings from "./listings";
+import { Listing } from "./types";
 
 async function fetchListings() {
   const res = await fetch(
@@ -13,8 +12,9 @@ async function fetchListings() {
 
 export default async function Home() {
   const listings = await fetchListings();
+
   return (
-    <main className="flex min-h-screen flex-col p-12 pt-24">
+    <main className="flex min-h-screen flex-col px-12">
       <Listings items={listings} />
     </main>
   );
