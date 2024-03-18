@@ -62,25 +62,25 @@ export default function ListingPage({ params }: any) {
             width={400}
             height={400}
           />
-          <div className="flex justify-around *:flex *:flex-col *:text-center mt-2 border border-gray-300 p-2">
+          <div className="flex justify-around *:flex *:flex-col *:text-center *:text-gray-400 mt-2 border border-gray-300 p-2">
             <div>
-              <span>{details?.Bedrooms}</span>
+              <span className="text-gray-800 text-lg">{details?.Bedrooms}</span>
               BED
             </div>
             <div>
-              <span>{details?.Bathrooms}</span>
+              <span className="text-gray-800 text-lg">{details?.Bathrooms}</span>
               BATH
             </div>
             <div>
-              <span>{details?.Parking}</span>
+              <span className="text-gray-800 text-lg">{details?.Parking}</span>
               PARKING
             </div>
             <div>
-              <span>{details?.Sqft}</span>
+              <span className="text-gray-800 text-lg">{details?.Sqft}</span>
               SQFT
             </div>
             <div>
-              <span>{details?.YearBuilt}</span>
+              <span className="text-gray-800 text-lg">{details?.YearBuilt}</span>
               YEAR BUILT
             </div>
           </div>
@@ -96,6 +96,7 @@ export default function ListingPage({ params }: any) {
             <h3 className="text-xl mb-4">Contact Agent</h3>
             <form className="flex flex-col gap-3" onSubmit={sendContactInfo}>
               <input
+              
                 type="text"
                 name="name"
                 id="name"
