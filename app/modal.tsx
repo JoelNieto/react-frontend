@@ -4,13 +4,12 @@ import { useEffect, useState } from "react";
 import { useGlobalContext } from "./Context/store";
 import { Listing } from "./types";
 function formatCurrency(amount: number) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",maximumFractionDigits:0
-      
-    }).format(amount);
-  }
-  
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
 
 export default function Modal() {
   const { showModal, toggleModal, savedIds, listings } = useGlobalContext();
@@ -30,17 +29,23 @@ export default function Modal() {
             <button onClick={() => toggleModal(false)}>X</button>
           </div>
           <div className="flex flex-col gap-1">
-          {saved.map((item) => {
-            return <div className="flex justify-between items-center border border-sky-600 p-4" key={item.Id}>
-                <div className="flex flex-col">
-                <p className="text-lg text-gray-800">{item.Title}</p>
-                <p className="text-sm text-gray-400">{item.Location}</p>
+            {saved.map((item) => {
+              return (
+                <div
+                  className="flex justify-between items-center border border-sky-600 p-4"
+                  key={item.Id}
+                >
+                  <div className="flex flex-col">
+                    <p className="text-lg text-gray-800">{item.Title}</p>
+                    <p className="text-sm text-gray-400">{item.Location}</p>
+                  </div>
+                  <p className="text-2xl">
+                    {formatCurrency(item["Sale Price"])}
+                  </p>
                 </div>
-                <p className="text-2xl">{formatCurrency(item["Sale Price"])}</p>
-                </div>;
-          })}
+              );
+            })}
           </div>
-         
         </div>
       </div>
     )
