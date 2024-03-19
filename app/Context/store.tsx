@@ -10,17 +10,21 @@ import {
 import { Listing } from "../types";
 
 interface ContextProps {
-  selectedId: string;
-  setSelectedId: Dispatch<SetStateAction<string>>;
+  savedIds: number[];
+  setSavedIds: Dispatch<SetStateAction<number[]>>;
   listings: Listing[];
   setListings: Dispatch<SetStateAction<Listing[]>>;
+  showModal: boolean;
+  toggleModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
-  selectedId: "",
-  setSelectedId: (): string => "",
+  savedIds: [],
+  setSavedIds: (): number[] => [],
   listings: [],
   setListings: (): Listing[] => [],
+  showModal: false,
+  toggleModal: () => false,
 });
 
 export const GlobalContextProvider = ({
@@ -28,12 +32,20 @@ export const GlobalContextProvider = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const [selectedId, setSelectedId] = useState("");
+  const [savedIds, setSavedIds] = useState<number[]>([]);
   const [listings, setListings] = useState<Listing[]>([]);
+  const [showModal, toggleModal] = useState<boolean>(false);
 
   return (
     <GlobalContext.Provider
-      value={{ selectedId, setSelectedId, listings, setListings }}
+      value={{
+        savedIds,
+        setSavedIds,
+        listings,
+        setListings,
+        showModal,
+        toggleModal,
+      }}
     >
       {children}
     </GlobalContext.Provider>

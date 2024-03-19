@@ -19,16 +19,21 @@ function formatCurrency(amount: number) {
   }).format(amount);
 }
 
-export default function ListingPage({ params }: any) {
-  const { listings } = useGlobalContext();
+export default function ListingPage({ params }: { params: { id: string } }) {
+  const { listings, toggleModal, savedIds, setSavedIds } = useGlobalContext();
   const [details, setDetails] = useState<Listing>();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [comments, setComments] = useState("");
 
+  const saveListing = (id: number) => {
+    setSavedIds([...savedIds, id]);
+    toggleModal(true);
+  }
+
   const sendContactInfo = (event) => {
-    toast.success('Message sent successfully')
+    toast.success("Message sent successfully");
 
     event.preventDefault();
     console.log({ name, email, phone, comments });
@@ -68,7 +73,9 @@ export default function ListingPage({ params }: any) {
               BED
             </div>
             <div>
-              <span className="text-gray-800 text-lg">{details?.Bathrooms}</span>
+              <span className="text-gray-800 text-lg">
+                {details?.Bathrooms}
+              </span>
               BATH
             </div>
             <div>
@@ -80,7 +87,9 @@ export default function ListingPage({ params }: any) {
               SQFT
             </div>
             <div>
-              <span className="text-gray-800 text-lg">{details?.YearBuilt}</span>
+              <span className="text-gray-800 text-lg">
+                {details?.YearBuilt}
+              </span>
               YEAR BUILT
             </div>
           </div>
@@ -88,7 +97,7 @@ export default function ListingPage({ params }: any) {
         </div>
         <div className="flex flex-col gap-3 w-1/2">
           <div className="w-full flex justify-end">
-            <button className="bg-sky-700 text-white px-4 py-2">
+            <button className="bg-sky-700 text-white px-4 py-2" onClick={() => saveListing(details.Id)}>
               Save Listing
             </button>
           </div>
@@ -96,7 +105,6 @@ export default function ListingPage({ params }: any) {
             <h3 className="text-xl mb-4">Contact Agent</h3>
             <form className="flex flex-col gap-3" onSubmit={sendContactInfo}>
               <input
-              
                 type="text"
                 name="name"
                 id="name"

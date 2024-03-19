@@ -114,7 +114,7 @@ export default function Listings({ items }: { items: Listing[] }) {
   );
 }
 
-function ListingItem({ item }: any) {
+function ListingItem({ item }: { item: Listing }) {
   return (
     <div className="shadow">
       <Image
